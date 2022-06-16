@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -55,9 +54,6 @@
     <ApplicationIcon>Resources\rec.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Costura, Version=5.8.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Costura.Fody.5.8.0-alpha0098\lib\netstandard1.0\Costura.dll</HintPath>
-    </Reference>
     <Reference Include="LibVLCSharp, Version=3.6.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LibVLCSharp.3.6.6\lib\net471\LibVLCSharp.dll</HintPath>
     </Reference>
@@ -70,6 +66,9 @@
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="NReco.VideoConverter, Version=1.1.4.0, Culture=neutral, PublicKeyToken=395ccb334978a0cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.VideoConverter.1.1.4\lib\net40\NReco.VideoConverter.dll</HintPath>
     </Reference>
     <Reference Include="Sentry, Version=3.17.1.0, Culture=neutral, PublicKeyToken=fba2ec45388e2af0, processorArchitecture=MSIL">
       <HintPath>..\packages\Sentry.3.17.1\lib\net461\Sentry.dll</HintPath>
@@ -298,6 +297,7 @@
     <Compile Include="Classes\Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\installRDP.cs" />
     <Compile Include="ScreenRecorder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,14 +371,9 @@
     <Error Condition="!Exists('..\packages\VisioForge.DotNet.Core.Redist.Base.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.Base.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VisioForge.DotNet.Core.Redist.Base.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.Base.x64.targets'))" />
     <Error Condition="!Exists('..\packages\VisioForge.DotNet.Core.Redist.VideoCapture.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.VideoCapture.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VisioForge.DotNet.Core.Redist.VideoCapture.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.VideoCapture.x64.targets'))" />
     <Error Condition="!Exists('..\packages\VisioForge.DotNet.Core.Redist.MP4.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.MP4.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VisioForge.DotNet.Core.Redist.MP4.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.MP4.x64.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.6.6.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.6.2\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props'))" />
-    <Error Condition="!Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets'))" />
   </Target>
   <Import Project="..\packages\SkiaSharp.NativeAssets.Win32.2.88.1-preview.1\build\net462\SkiaSharp.NativeAssets.Win32.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Win32.2.88.1-preview.1\build\net462\SkiaSharp.NativeAssets.Win32.targets')" />
   <Import Project="..\packages\VisioForge.DotNet.Core.Redist.Base.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.Base.x64.targets" Condition="Exists('..\packages\VisioForge.DotNet.Core.Redist.Base.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.Base.x64.targets')" />
   <Import Project="..\packages\VisioForge.DotNet.Core.Redist.VideoCapture.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.VideoCapture.x64.targets" Condition="Exists('..\packages\VisioForge.DotNet.Core.Redist.VideoCapture.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.VideoCapture.x64.targets')" />
   <Import Project="..\packages\VisioForge.DotNet.Core.Redist.MP4.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.MP4.x64.targets" Condition="Exists('..\packages\VisioForge.DotNet.Core.Redist.MP4.x64.15.3.30\build\VisioForge.DotNet.Core.Redist.MP4.x64.targets')" />
-  <Import Project="..\packages\Fody.6.6.2\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.2\build\Fody.targets')" />
-  <Import Project="..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets')" />
 </Project>

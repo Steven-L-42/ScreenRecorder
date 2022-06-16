@@ -1,5 +1,9 @@
 ﻿
+using NReco.VideoConverter;
+using ScreenRecorder;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Output;
@@ -21,7 +25,7 @@ namespace Screener
             InitializeComponent();
            
         }
-    
+
 
         private async void btnRecord_Click(object sender, EventArgs e)
         {
@@ -68,11 +72,11 @@ namespace Screener
                 capt.Audio_PlayAudio = capt.Audio_RecordAudio = false;
                 capt.Mode = VideoCaptureMode.ScreenCapture;
                 capt.Output_Format = new MP4Output();
-
-                capt.Output_Filename = "ChaosBot.mp4";
+            
+                capt.Output_Filename = "NewVideo.mp4";
 
                 await capt.StartAsync();
-                
+               
             }
            
         }
@@ -85,6 +89,17 @@ namespace Screener
             buttonSelectArea.Enabled = true;
             btnFullscreen.Enabled = true;
             await capt.StopAsync();
+            await Task.Delay(5000);
+
+            string now = DateTime.Now.ToString("[dd.MM.yyyy-HH.mm]");
+            string logo = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/logo.png";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/NewVideo" + now + ".mp4";
+
+
+           
+            System.IO.File.Move("NewVideo.mp4", path);
+            //FFMpegConverter wrap = new FFMpegConverter();
+            //wrap.Invoke("-i " + path + " - i " + logo + " -filter_complex " + path);
         }
 
         private void Form1_Load(object sender, EventArgs e)
